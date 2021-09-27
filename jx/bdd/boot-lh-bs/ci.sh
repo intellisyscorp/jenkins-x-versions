@@ -19,7 +19,7 @@ mkdir -p $JX_HOME/git
 
 # TODO hack until we fix boot to do this too!
 helm init --client-only --stable-repo-url https://charts.helm.sh/stable
-helm repo add jenkins-x https://storage.googleapis.com/chartmuseum.jenkins-x.io
+helm repo add jenkins-x https://jenkins-x-charts.github.io/v2
 
 jx install dependencies --all
 
@@ -30,7 +30,7 @@ echo "https://$BB_USERNAME:$BB_ACCESS_TOKEN@bitbucket.beescloud.com" > $JX_HOME/
 
 gcloud auth activate-service-account --key-file $GKE_SA
 
-# lets setup git 
+# lets setup git
 git config --global --add user.name JenkinsXBot
 git config --global --add user.email jenkins-x@googlegroups.com
 

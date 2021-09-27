@@ -19,7 +19,7 @@ mkdir -p $JX_HOME/git
 
 # TODO hack until we fix boot to do this too!
 helm init --client-only --stable-repo-url https://charts.helm.sh/stable
-helm repo add jenkins-x https://storage.googleapis.com/chartmuseum.jenkins-x.io
+helm repo add jenkins-x https://jenkins-x-charts.github.io/v2
 
 jx install dependencies --all
 
@@ -31,7 +31,7 @@ echo "https://$GH_USERNAME:$GH_ACCESS_TOKEN@github.com" > $JX_HOME/git/credentia
 # setup GCP service account
 gcloud auth activate-service-account --key-file $GKE_SA
 
-# setup git 
+# setup git
 git config --global --add user.name JenkinsXBot
 git config --global --add user.email jenkins-x@googlegroups.com
 
@@ -53,10 +53,10 @@ export BOOT_CONFIG_VERSION=$(jx step get dependency-version --host=github.com --
 git clone https://github.com/jenkins-x/jenkins-x-boot-config.git boot-source
 cd boot-source
 git checkout tags/v${BOOT_CONFIG_VERSION} -b latest-boot-config
-cp ../jx/bdd/boot-vault-tls/jx-requirements.yml . 
+cp ../jx/bdd/boot-vault-tls/jx-requirements.yml .
 cp ../jx/bdd/boot-vault-tls/parameters.yaml env
 
-# Rotate the domains to avoid cert-manager API rate limit. 
+# Rotate the domains to avoid cert-manager API rate limit.
 # This rotation is using # 2 domains per hour, using a "seed" of today's day-of-year to ensure a different start of
 # the rotation daily.
 if [[ "${DOMAIN_ROTATION}" == "true" ]]; then
@@ -77,7 +77,7 @@ if [[ "${DOMAIN_ROTATION}" == "true" ]]; then
     fi
     DOMAIN="${DOMAIN_PREFIX}${SHARD}${DOMAIN_SUFFIX}"
     if [[ -z "${DOMAIN}" ]]; then
-        echo "Domain rotation enabled. Please set DOMAIN_PREFIX and DOMAIN_SUFFIX environment variables" 
+        echo "Domain rotation enabled. Please set DOMAIN_PREFIX and DOMAIN_SUFFIX environment variables"
         exit -1
     fi
     echo "Using domain: ${DOMAIN}"

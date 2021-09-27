@@ -9,11 +9,11 @@ git:
 
 service:
   name: hook
-  
+
 replicaCount: 2
 
 image:
-  repository: gcr.io/jenkinsxio/lighthouse
+  repository: ghcr.io/jenkins-x/lighthouse
 
 vault:
 {{- if eq .Values.jxRequirements.secretStorage "vault" }}

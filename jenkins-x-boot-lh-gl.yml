@@ -17,7 +17,7 @@ pipelineConfig:
             value: http://jenkins-x-athens-proxy:80
           - name: GKE_SA
             value: /secrets/bdd/sa.json
-          - name: GL_ACCESS_TOKEN 
+          - name: GL_ACCESS_TOKEN
             valueFrom:
               secretKeyRef:
                 name: jx-pipeline-git-gitlab-gl
@@ -25,10 +25,10 @@ pipelineConfig:
           - name: JENKINS_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: test-jenkins-user 
+                name: test-jenkins-user
                 key: password
         agent:
-          image: gcr.io/jenkinsxio/builder-go-nodejs:2.1.155-778
+          image: ghcr.io/jenkins-x/builder-go-nodejs:2.1.155-778-patch3
         stages:
           - name: ci
             options:
